@@ -35,7 +35,11 @@ function App() {
   }, []);
 
   const scrollToSection = (index) => {
-    document.querySelectorAll('.section')[index]?.scrollIntoView({ behavior: 'smooth' });
+    if (index === 2) {
+      document.querySelector('.contact-footer')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      document.querySelectorAll('.section')[index]?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -63,7 +67,8 @@ function App() {
 
       {/* About Section */}
       <section className="section about">
-        <h2 className="section-title">About</h2>
+        <h2>About</h2>
+
         {/* Skills */}
         <div className="skills-block">
           <h3>Technical Skills</h3>
@@ -140,13 +145,34 @@ function App() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="section contact">
-        <h2>Contact</h2>
-        <p>a.kowta@gwu.edu</p>
-        <p>703-946-0261</p>
-        <p>Arlington, VA</p>
-      </section>
+      {/* Contact Footer */}
+      <footer className="contact-footer">
+        <div className="contact-top">
+          <div className="contact-left">
+            <h2>Let's connect</h2>
+            <p className="contact-sub">Open to new opportunities and collaborations.</p>
+          </div>
+          <div className="contact-right">
+            <a href="mailto:akowta@gmail.com" className="contact-item">
+              <span className="contact-icon">✉</span>
+              <span>a.kowta@gwu.edu</span>
+            </a>
+            {/* <a href="tel:7039460261" className="contact-item">
+              <span className="contact-icon">✆</span>
+              <span>703-946-0261</span>
+            </a> */}
+            <div className="contact-socials">
+              <a href="https://www.linkedin.com/in/alekya-kowta/" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
+              <a href="https://github.com/AlekyaKowta" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div className="contact-divider" />
+        <div className="contact-bottom">
+          <span className="contact-copy">© 2025 Alekya Kowta · Arlington, VA</span>
+          <span className="contact-tagline">Built with React</span>
+        </div>
+      </footer>
     </div>
   );
 }
