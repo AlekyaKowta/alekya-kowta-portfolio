@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+// Art images (a-image)
+import art1 from './images/a-image1.png';
+import art2 from './images/a-image2.png';
+import art3 from './images/a-image3.png';
+import art4 from './images/a-image4.png';
+
+// Photography images (image)
+import photo1 from './images/image1.png';
+import photo2 from './images/image2.png';
+import photo3 from './images/image3.png';
+import photo4 from './images/image4.png';
+import photo5 from './images/image5.png';
+
 const skills = [
   { name: 'Java',       logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
   { name: 'Python',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
@@ -133,6 +146,11 @@ function App() {
             <p>Classifies images as human-generated vs AI-generated. User votes recorded via Solidity smart contracts for transparency and integrity.</p>
           </div>
           <div className="project-card">
+            <h3>Traffic Data Analysis using YOLO Object Detection Models</h3>
+            <p className="project-tags">ML</p>
+            <p>Performed extensive data cleaning, validation, and preprocessing on large image datasets to train and evaluate machine learning models for real-world scenarios.</p>
+          </div>
+          <div className="project-card">
             <h3>Smart Walking System</h3>
             <p className="project-tags">IoT · Embedded Systems</p>
             <p>Patented assistive navigation system for the elderly and visually impaired. Filed as a Patent Application (2022).</p>
@@ -145,6 +163,103 @@ function App() {
         </div>
       </section>
 
+      {/* Hobbies Section */}
+      <section className="section hobbies">
+        <div className="hobbies-header">
+          <h2>Beyond the Code</h2>
+          <p className="hobbies-tagline">
+            Where algorithms meet aesthetics —<br/>
+            <em>I paint with light, and sketch with silence.</em>
+          </p>
+        </div>
+
+        <div className="hobbies-split">
+        {/* Art */}
+        <div className="hobby-block">
+          <div className="hobby-label">
+            <span className="hobby-number">01</span>
+            <div>
+              <h3>Art & Illustration</h3>
+              <p>Translating emotion into strokes. Every canvas is a system with its own logic.</p>
+            </div>
+          </div>
+          <div className="gallery-art">
+            <div className="gallery-cell tall">
+              <div className="gallery-img-wrap">
+                <img src={art1} alt="" className="gallery-img" />
+                <span className="gallery-label">Art 01</span>
+              </div>
+            </div>
+            <div className="gallery-col">
+              <div className="gallery-cell">
+                <div className="gallery-img-wrap">
+                  <img src={art2} alt="" className="gallery-img" />
+                  <span className="gallery-label">Art 02</span>
+                </div>
+              </div>
+              <div className="gallery-cell">
+                <div className="gallery-img-wrap">
+                  <img src={art3} alt="" className="gallery-img" />
+                  <span className="gallery-label">Art 03</span>
+                </div>
+              </div>
+            </div>
+            <div className="gallery-cell">
+              <div className="gallery-img-wrap">
+                <img src={art4} alt="" className="gallery-img" />
+                <span className="gallery-label">Art 04</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="hobby-divider" />
+
+        {/* Photography */}
+        <div className="hobby-block">
+          <div className="hobby-label">
+            <span className="hobby-number">02</span>
+            <div>
+              <h3>Photography</h3>
+              <p>Capturing the frames between moments. Finding symmetry in the unscripted world.</p>
+            </div>
+          </div>
+          <div className="gallery-photo">
+            <div className="gallery-cell cell-tall-left">
+              <div className="gallery-img-wrap">
+                <img src={photo1} alt="" className="gallery-img" />
+                <span className="gallery-label">Photo 01</span>
+              </div>
+            </div>
+            <div className="gallery-cell cell-mid-top-1">
+              <div className="gallery-img-wrap">
+                <img src={photo2} alt="" className="gallery-img" />
+                <span className="gallery-label">Photo 02</span>
+              </div>
+            </div>
+            <div className="gallery-cell cell-mid-top-2">
+              <div className="gallery-img-wrap">
+                <img src={photo3} alt="" className="gallery-img" />
+                <span className="gallery-label">Photo 03</span>
+              </div>
+            </div>
+            <div className="gallery-cell cell-tall-right">
+              <div className="gallery-img-wrap">
+                <img src={photo4} alt="" className="gallery-img" />
+                <span className="gallery-label">Photo 04</span>
+              </div>
+            </div>
+            <div className="gallery-cell cell-mid-bot">
+            <div className="gallery-img-wrap">
+              <img src={photo5} alt="" className="gallery-img" />
+              <span className="gallery-label">Photo 05</span>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+
       {/* Contact Footer */}
       <footer className="contact-footer">
         <div className="contact-top">
@@ -153,17 +268,17 @@ function App() {
             <p className="contact-sub">Open to new opportunities and collaborations.</p>
           </div>
           <div className="contact-right">
-            <a href="mailto:akowta@gmail.com" className="contact-item">
+            <a href="mailto:a.kowta@gwu.edu" className="contact-item">
               <span className="contact-icon">✉</span>
               <span>a.kowta@gwu.edu</span>
             </a>
-            {/* <a href="tel:7039460261" className="contact-item">
+            <a href="tel:7039460261" className="contact-item">
               <span className="contact-icon">✆</span>
               <span>703-946-0261</span>
-            </a> */}
+            </a>
             <div className="contact-socials">
-              <a href="https://www.linkedin.com/in/alekya-kowta/" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
-              <a href="https://github.com/AlekyaKowta" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
+              <a href="https://github.com" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
             </div>
           </div>
         </div>

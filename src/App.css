@@ -460,3 +460,240 @@ body {
     padding: 80px 5%;
   }
 }
+
+/* ── Hobbies ─────────────────────────────────── */
+.hobbies {
+  min-height: auto;
+  padding: 100px 8%;
+}
+
+.hobbies-header {
+  margin-bottom: 5rem;
+}
+
+.hobbies-header h2 {
+  margin-bottom: 1rem;
+}
+
+.hobbies-tagline {
+  font-size: 1.3rem;
+  color: #b05c95;
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 480px;
+  opacity: 0.9;
+}
+
+.hobbies-tagline em {
+  font-size: 1.5rem;
+  font-weight: 300;
+  background: linear-gradient(135deg, #ff85c2, #c2006b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.hobbies-split {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.hobby-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220,160,200,0.4), transparent);
+}
+
+.hobby-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hobby-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.hobby-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(200, 80, 140, 0.12);
+  line-height: 1;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.hobby-label h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #7c2d6e;
+  margin-bottom: 0.4rem;
+}
+
+.hobby-label p {
+  color: #b05c95;
+  font-size: 0.98rem;
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+/* Art gallery — masonry-ish 3-col */
+.gallery-art {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr;
+  grid-template-rows: 200px 200px;
+  gap: 12px;
+}
+
+.gallery-art .tall {
+  grid-row: span 2;
+}
+
+.gallery-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Photo gallery — horizontal filmstrip style */
+.gallery-photo {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  grid-template-rows: 220px;
+  gap: 12px;
+}
+
+/* Shared cell */
+.gallery-cell {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Art placeholders */
+.placeholder-art,
+.placeholder-photo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  cursor: pointer;
+}
+
+.placeholder-art:hover,
+.placeholder-photo:hover {
+  transform: scale(1.03);
+  filter: brightness(1.06);
+}
+
+.placeholder-art span,
+.placeholder-photo span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.18);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.p1 { background: linear-gradient(135deg, #f9c0d8 0%, #e888b8 40%, #c84090 100%); }
+.p2 { background: linear-gradient(160deg, #fddde6 0%, #f4a0c4 100%); }
+.p3 { background: linear-gradient(135deg, #fce4f3 0%, #dba0d0 100%); }
+.p4 { background: linear-gradient(135deg, #e8b4d8 0%, #c070a8 100%); }
+
+.p5 { background: linear-gradient(135deg, #ffe0b0 0%, #ffb060 50%, #e86030 100%); }
+.p6 { background: linear-gradient(160deg, #c8d8f0 0%, #8090c0 100%); }
+.p7 { background: linear-gradient(135deg, #d0e8d0 0%, #80b880 100%); }
+.p8 { background: linear-gradient(135deg, #e0d0f0 0%, #9070b0 100%); }
+
+@media (max-width: 768px) {
+  .gallery-art,
+  .gallery-photo {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .gallery-art .tall { grid-row: span 1; }
+  .gallery-col { flex-direction: row; }
+  .placeholder-art, .placeholder-photo { min-height: 150px; }
+}
+
+.gallery-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.gallery-img-wrap:hover .gallery-img {
+  transform: scale(1.03);
+}
+
+.gallery-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.18);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.gallery-photo {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  grid-template-rows: 200px 200px;
+  gap: 12px;
+}
+
+.gallery-photo .cell-tall-left {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.gallery-photo .cell-mid-top-1 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.gallery-photo .cell-mid-top-2 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.gallery-photo .cell-mid-bot {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.gallery-photo .cell-mid-bot-2 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.gallery-photo .cell-tall-right {
+  grid-column: 4;
+  grid-row: 1 / span 2;
+}
