@@ -33,6 +33,90 @@ const skills = [
   { name: 'Linux',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
 ];
 
+function MathArt() {
+  const canvasRef = React.useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const size = 140;
+    canvas.width = size;
+    canvas.height = size;
+    const cx = size / 2;
+    const cy = size / 2;
+    let frame = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, size, size);
+
+      // Outer glow ring
+      const glow = ctx.createRadialGradient(cx, cy, 30, cx, cy, 100);
+      glow.addColorStop(0, 'rgba(255, 100, 180, 0.08)');
+      glow.addColorStop(1, 'rgba(255, 100, 180, 0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, size, size);
+
+      const t = frame * 0.012;
+      const k = 5; // rose petals (try 3, 5, 7)
+
+      // Draw trailing layers for depth
+      [0.018, 0.012, 0.006, 0].forEach((offset, i) => {
+        const alpha = 0.15 + i * 0.2;
+        const radius = 68 + Math.sin(t * 0.7) * 3;
+
+        ctx.beginPath();
+        for (let a = 0; a <= Math.PI * 2; a += 0.008) {
+          const r = radius * Math.cos(k * (a + t * 0.3 + offset));
+          const x = cx + r * Math.cos(a);
+          const y = cy + r * Math.sin(a);
+          a === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+
+        const grad = ctx.createLinearGradient(cx - 80, cy - 80, cx + 80, cy + 80);
+        grad.addColorStop(0, `rgba(255, 133, 194, ${alpha})`);
+        grad.addColorStop(0.5, `rgba(220, 0, 110, ${alpha * 0.8})`);
+        grad.addColorStop(1, `rgba(180, 80, 160, ${alpha})`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5 - i * 0.3;
+        ctx.stroke();
+      });
+
+      // Lissajous center accent
+      ctx.beginPath();
+      for (let i = 0; i <= 300; i++) {
+        const s = (i / 300) * Math.PI * 2;
+        const x = cx + 22 * Math.sin(3 * s + t * 0.5);
+        const y = cy + 22 * Math.cos(2 * s + t * 0.3);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(255, 180, 220, 0.6)`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Center dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(220, 0, 110, 0.5)';
+      ctx.fill();
+
+      frame++;
+      requestAnimationFrame(draw);
+    };
+
+    const anim = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(anim);
+  }, []);
+
+  return (
+    <div className="math-art-wrap">
+      <canvas ref={canvasRef} className="math-canvas" />
+      {/* <span className="math-label">r = cos(5θ)</span> */}
+    </div>
+  );
+}
+
+
 function App() {
   const [typedText, setTypedText] = useState('');
   const fullText = "Hi, I'm Alekya Kowta - a passionate software engineer crafting scalable systems across distributed cloud infrastructure.";
@@ -60,6 +144,7 @@ function App() {
       {/* Cover Section */}
       <section className="cover">
         <div className="cover-content">
+          <MathArt />
           <h1 className="name">Alekya Kowta</h1>
           <p className="subtitle">Software Engineer</p>
           <p className="typewriter">{typedText}<span className="cursor">|</span></p>

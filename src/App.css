@@ -697,3 +697,17 @@ body {
   grid-column: 4;
   grid-row: 1 / span 2;
 }
+
+.math-art-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: 0;
+}
+.math-canvas {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
