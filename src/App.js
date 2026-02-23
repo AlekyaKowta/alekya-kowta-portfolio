@@ -56,7 +56,7 @@ function MathArt() {
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, size, size);
 
-      const t = frame * 0.012;
+      const t = frame * 0.01;
       const k = 5; // rose petals (try 3, 5, 7)
 
       // Draw trailing layers for depth
@@ -184,39 +184,62 @@ function App() {
         <div className="experience-block">
           <h3>Experience</h3>
 
-          <div className="exp-item">
-            <div className="exp-header">
-              <span className="exp-title">Software Engineer I — Dell Technologies</span>
-              <span className="exp-date">Aug 2022 – Aug 2025</span>
+          <div className="timeline">
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-body">
+                <div className="timeline-meta">
+                  <span className="timeline-company">Dell Technologies</span>
+                  <span className="timeline-date">Aug 2022 – Aug 2025</span>
+                </div>
+                <h4 className="timeline-role">Software Engineer I</h4>
+                <div className="timeline-tags">
+                  <span>Kubernetes</span><span>Kafka</span><span>Azure</span><span>Redis</span>
+                </div>
+                <ul className="timeline-points">
+                  <li>Designed APIs for 150M+ connected devices across global traffic.</li>
+                  <li>Led Kubernetes migration — 20% throughput gain, reduced deploy latency.</li>
+                  <li>Built high-throughput pipelines using Kafka & Azure Event Hubs.</li>
+                  <li>Optimized Redis microservices for low-latency high-concurrency reads.</li>
+                </ul>
+              </div>
             </div>
-            <ul className="exp-list">
-              <li>Designed APIs and distributed services to remotely configure 150M+ connected devices for global traffic.</li>
-              <li>Led infrastructure migration to Kubernetes, achieving a 20% throughput gain and reduced deployment latency.</li>
-              <li>Implemented high-throughput message passing using Kafka and Azure Event Hubs for real-time telemetry.</li>
-              <li>Optimized low-latency microservices with Redis, reducing data retrieval times at high concurrency.</li>
-            </ul>
-          </div>
 
-          <div className="exp-item">
-            <div className="exp-header">
-              <span className="exp-title">Software Engineering Intern — Dell Technologies</span>
-              <span className="exp-date">Jan 2022 – Aug 2022</span>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-body">
+                <div className="timeline-meta">
+                  <span className="timeline-company">Dell Technologies</span>
+                  <span className="timeline-date">Jan 2022 – Aug 2022</span>
+                </div>
+                <h4 className="timeline-role">Software Engineering Intern</h4>
+                <div className="timeline-tags">
+                  <span>Grafana</span><span>PowerBI</span>
+                </div>
+                <ul className="timeline-points">
+                  <li>Built real-time dashboards to visualize service performance metrics.</li>
+                  <li>Presented feasibility analyses and proofs-of-concept to leadership.</li>
+                </ul>
+              </div>
             </div>
-            <ul className="exp-list">
-              <li>Built real-time operational dashboards using Grafana and PowerBI to visualize service performance metrics.</li>
-              <li>Developed proofs-of-concept and presented feasibility analyses to engineering leadership.</li>
-            </ul>
-          </div>
 
-          <div className="exp-item">
-            <div className="exp-header">
-              <span className="exp-title">Web Development Intern — GKMT IT</span>
-              <span className="exp-date">Mar 2020 – Jun 2020</span>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-body">
+                <div className="timeline-meta">
+                  <span className="timeline-company">GKMT IT</span>
+                  <span className="timeline-date">Mar 2020 – Jun 2020</span>
+                </div>
+                <h4 className="timeline-role">Web Development Intern</h4>
+                <div className="timeline-tags">
+                  <span>HTML</span><span>CSS</span><span>Web</span>
+                </div>
+                <ul className="timeline-points">
+                  <li>Engineered responsive platforms, improving page load times by 25%.</li>
+                  <li>Designed secure user registration systems.</li>
+                </ul>
+              </div>
             </div>
-            <ul className="exp-list">
-              <li>Engineered responsive web platforms and improved page load times by 25%.</li>
-              <li>Designed secure user registration systems, significantly reducing support requests.</li>
-            </ul>
           </div>
         </div>
       </section>
