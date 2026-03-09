@@ -15,21 +15,24 @@ import photo4 from './images/image4.png';
 import photo5 from './images/image5.png';
 
 const skills = [
+  { name: 'C#',         logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg' },
+  { name: '.NET',       logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
   { name: 'Java',       logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+  { name: 'Spring Boot',logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
   { name: 'Python',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
   { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-  { name: 'C#',         logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg' },
   { name: 'C++',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
   { name: 'SQL',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-  { name: 'Spring Boot',logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+  { name: 'Azure',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
+  { name: 'AWS',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
   { name: 'Docker',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
   { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
-  { name: 'Azure',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
-  { name: 'Redis',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
-  { name: 'Oracle',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg' },
   { name: 'Git',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+  { name: 'GitLab',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg' },
   { name: 'Jenkins',    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg' },
+  { name: 'Redis',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
   { name: 'Kafka',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg' },
+  { name: 'Oracle',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg' },
   { name: 'Linux',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
 ];
 
@@ -194,13 +197,14 @@ function App() {
                 </div>
                 <h4 className="timeline-role">Software Engineer I</h4>
                 <div className="timeline-tags">
-                  <span>Kubernetes</span><span>Kafka</span><span>Azure</span><span>Redis</span>
+                  <span>Kubernetes</span><span>Kafka</span><span>Azure</span><span>Redis</span><span>Oracle</span>
                 </div>
                 <ul className="timeline-points">
-                  <li>Designed APIs for 150M+ connected devices across global traffic.</li>
-                  <li>Led Kubernetes migration — 20% throughput gain, reduced deploy latency.</li>
-                  <li>Built high-throughput pipelines using Kafka & Azure Event Hubs.</li>
-                  <li>Optimized Redis microservices for low-latency high-concurrency reads.</li>
+                  <li>Architected distributed REST APIs configuring 150M+ connected devices at 99.9% availability.</li>
+                  <li>Led Kubernetes migration — 20% throughput gain and 35% reduction in deployment latency.</li>
+                  <li>Built Kafka & Azure Event Hubs pipelines processing 500K+ telemetry events daily with sub-second latency.</li>
+                  <li>Reduced data retrieval latency by 40% via Redis caching across high-concurrency microservices.</li>
+                  <li>Designed schemas supporting 10M+ daily transactions with zero downtime during peak load.</li>
                 </ul>
               </div>
             </div>
@@ -214,11 +218,12 @@ function App() {
                 </div>
                 <h4 className="timeline-role">Software Engineering Intern</h4>
                 <div className="timeline-tags">
-                  <span>Grafana</span><span>PowerBI</span>
+                  <span>Grafana</span><span>PowerBI</span><span>Python</span>
                 </div>
                 <ul className="timeline-points">
-                  <li>Built real-time dashboards to visualize service performance metrics.</li>
-                  <li>Presented feasibility analyses and proofs-of-concept to leadership.</li>
+                  <li>Built Grafana & PowerBI dashboards monitoring 15+ service KPIs, cutting incident detection time by 25%.</li>
+                  <li>Co-developed 3 backend POCs for secure workspace features, presenting results to engineering leadership.</li>
+                  <li>Automated deployment validation with Python scripts, saving ~4 hours per release cycle.</li>
                 </ul>
               </div>
             </div>
@@ -230,13 +235,13 @@ function App() {
                   <span className="timeline-company">GKMT IT</span>
                   <span className="timeline-date">Mar 2020 – Jun 2020</span>
                 </div>
-                <h4 className="timeline-role">Web Development Intern</h4>
+                <h4 className="timeline-role">Software Intern</h4>
                 <div className="timeline-tags">
                   <span>HTML</span><span>CSS</span><span>Web</span>
                 </div>
                 <ul className="timeline-points">
-                  <li>Engineered responsive platforms, improving page load times by 25%.</li>
-                  <li>Designed secure user registration systems.</li>
+                  <li>Engineered responsive platforms with optimized asset delivery, reducing page load times by 25%.</li>
+                  <li>Designed secure authentication system, cutting account-related support tickets by 40%.</li>
                 </ul>
               </div>
             </div>
@@ -247,7 +252,7 @@ function App() {
       {/* Projects Section */}
       <section className="section projects">
         <h2>Projects</h2>
-        <div className="project-grid">
+        <div className="project-grid" onClick ={() => window.open('https://github.com/jayparmar16/VoteAI-Image-Decentralized-Platform', '_blank')} style={{cursor:'pointer'}}>
           <div className="project-card">
             <h3>AI-Generated Image Verification</h3>
             <p className="project-tags">Python · Selenium · Ethereum · Solidity</p>
@@ -267,6 +272,12 @@ function App() {
             <h3>Pentesting & IoT Security Research</h3>
             <p className="project-tags">IEEE · Springer · Cybersecurity</p>
             <p>Published two papers on information gathering for pentesting (IEEE) and IoT vulnerabilities and threats (Springer, 2022).</p>
+          </div>
+          <div className="project-card winner" onClick={() => window.open('https://github.com/kritikaberry/TAI-Hackathon-Riverhouse-Problem5', '_blank')} style={{cursor:'pointer'}}>
+              <div className="winner-badge">🏆 Winner</div>
+              <h3>Trustworthy AI Hackathon</h3>
+              <p className="project-tags">AI · Ethics · Machine Learning</p>
+              <p>Won the Trustworthy AI Hackathon — building responsible, transparent AI systems with a focus on fairness and accountability.</p>
           </div>
         </div>
       </section>

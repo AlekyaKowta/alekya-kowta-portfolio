@@ -188,6 +188,20 @@ body {
   font-size: 0.95rem;
 }
 
+/* .winner {
+  border-color: rgba(255, 180, 50, 0.5) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255, 240, 200, 0.4)) !important;
+} */
+
+/* .winner-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8860b;
+  margin-bottom: 0.5rem;
+} */
+
 .contact-footer {
   background: linear-gradient(135deg, #fce8f3 0%, #f5d4ea 60%, #eedaf5 100%);
   border-top: 1px solid rgba(240, 196, 221, 0.5);
