@@ -252,16 +252,42 @@ function App() {
       {/* Projects Section */}
       <section className="section projects">
         <h2>Projects</h2>
-        <div className="project-grid" onClick ={() => window.open('https://github.com/jayparmar16/VoteAI-Image-Decentralized-Platform', '_blank')} style={{cursor:'pointer'}}>
-          <div className="project-card">
+        <div className="project-grid">
+          <div className="project-card debatrium-card" onClick={() => window.open('https://github.com/CSCI-6421-Distributed-System-Course/final-project-albert-einstein', '_blank')} style={{cursor:'pointer'}}>
+            <h3>Debatrium</h3>
+            <p className="project-tags">Python · OpenAI GPT-4o · AWS EC2 · SQS · ElastiCache Redis · API Gateway · Firebase Auth · CloudWatch</p>
+            <p>Nine independent GPT-4o agents — split across Research, Critic, and Judge roles — autonomously debate any question across iterative rounds. If judges' average score falls below 0.85, feedback loops back into research agents for another round, treating AI answer quality like peer review. Built on a cloud-native AWS architecture with EC2 Auto Scaling Groups, 12 SQS FIFO queues, and ElastiCache Redis (Multi-AZ).</p>
+          </div>
+          <div className="project-card" onClick={() => window.open('https://github.com/jayparmar16/VoteAI-Image-Decentralized-Platform', '_blank')} style={{cursor:'pointer'}}>
             <h3>AI-Generated Image Verification</h3>
             <p className="project-tags">Python · Selenium · Ethereum · Solidity</p>
             <p>Classifies images as human-generated vs AI-generated. User votes recorded via Solidity smart contracts for transparency and integrity.</p>
           </div>
           <div className="project-card">
+            <h3>Multi-Objective Carbon-Aware Freight Routing</h3>
+            <p className="project-tags">Python · Pandas · OSMnx · PyTorch · Stable-Baselines3</p>
+            <p>End-to-end pipeline enriching a real DC road graph (~960 nodes) with MOVES5 emission factors, SRTM elevation grades, and 4 time-of-day congestion profiles — generating 12 carbon weight attributes per edge across 3 vehicle classes. Benchmarked Weighted A* (3.34% carbon savings), Double DQN, and PPO with Behavioral Cloning (0.946 carbon optimality) jointly optimizing delivery time and CO₂ via preference weight α∈[0,1]. Terrain study showed 85% more benefit in hilly vs. flat networks.</p>
+          </div>
+          <div className="project-card">
             <h3>Traffic Data Analysis using YOLO Object Detection Models</h3>
             <p className="project-tags">ML</p>
             <p>Performed extensive data cleaning, validation, and preprocessing on large image datasets to train and evaluate machine learning models for real-world scenarios.</p>
+          </div>
+          <div className="project-card winner" onClick={() => window.open('https://github.com/kritikaberry/TAI-Hackathon-Riverhouse-Problem5', '_blank')} style={{cursor:'pointer'}}>
+              <div className="winner-badge">🏆 Winner</div>
+              <h3>Trustworthy AI Hackathon</h3>
+              <p className="project-tags">AI · Ethics · Machine Learning</p>
+              <p>Won the Trustworthy AI Hackathon — building responsible, transparent AI systems with a focus on fairness and accountability.</p>
+          </div>
+          <div className="project-card winner">
+              <div className="winner-badge">🏆 Spot Prize — Best Use of Solana</div>
+              <h3>Resilient Food — GeorgeHacks</h3>
+              <p className="project-tags">Python · Google Gemini · Solana · GeoPandas · Twilio · OpenStreetMap · OpenWeatherMap · USGS</p>
+              <p>Disaster-resilient food coordination platform connecting local vendors, farmers, and NGOs when infrastructure fails. Real-time SMS alerts fire to vendors on USGS/weather triggers, AI-powered market pulse summaries flag price shocks, and digital ration tickets keep economic activity local. Donor transparency enforced via on-chain Solana Devnet receipts. Road-network geospatial analysis (not straight-line) surfaces truly underserved communities.</p>
+              <div className="project-links">
+                <a href="https://devpost.com/software/resilientfood" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>Devpost ↗</a>
+                <a href="https://github.com/jayparmar16/GeorgeHacks_Food4All" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>GitHub ↗</a>
+              </div>
           </div>
           <div className="project-card">
             <h3>Smart Walking System</h3>
@@ -272,12 +298,6 @@ function App() {
             <h3>Pentesting & IoT Security Research</h3>
             <p className="project-tags">IEEE · Springer · Cybersecurity</p>
             <p>Published two papers on information gathering for pentesting (IEEE) and IoT vulnerabilities and threats (Springer, 2022).</p>
-          </div>
-          <div className="project-card winner" onClick={() => window.open('https://github.com/kritikaberry/TAI-Hackathon-Riverhouse-Problem5', '_blank')} style={{cursor:'pointer'}}>
-              <div className="winner-badge">🏆 Winner</div>
-              <h3>Trustworthy AI Hackathon</h3>
-              <p className="project-tags">AI · Ethics · Machine Learning</p>
-              <p>Won the Trustworthy AI Hackathon — building responsible, transparent AI systems with a focus on fairness and accountability.</p>
           </div>
         </div>
       </section>
@@ -396,8 +416,8 @@ function App() {
               <span>703-946-0261</span>
             </a>
             <div className="contact-socials">
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
+              <a href="https://www.linkedin.com/in/alekya-kowta" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
+              <a href="https://www.github.com/AlekyaKowta" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
             </div>
           </div>
         </div>

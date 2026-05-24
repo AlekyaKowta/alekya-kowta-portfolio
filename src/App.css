@@ -438,6 +438,34 @@ body {
   font-weight: bold;
 }
 
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.project-links a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #c2006b;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.project-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Debatrium featured card */
+.debatrium-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.65), rgba(240, 210, 255, 0.35)) !important;
+  border-color: rgba(180, 80, 200, 0.3) !important;
+  grid-column: 1 / -1;
+}
+
 /* Project tags */
 .project-tags {
   font-size: 0.8rem;
