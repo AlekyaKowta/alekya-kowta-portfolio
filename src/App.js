@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 // Art images (a-image)
@@ -14,417 +14,576 @@ import photo3 from './images/image3.png';
 import photo4 from './images/image4.png';
 import photo5 from './images/image5.png';
 
-const skills = [
-  { name: 'C#',         logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg' },
-  { name: '.NET',       logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
-  { name: 'Java',       logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
-  { name: 'Spring Boot',logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
-  { name: 'Python',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-  { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-  { name: 'C++',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
-  { name: 'SQL',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-  { name: 'Azure',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
-  { name: 'AWS',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
-  { name: 'Docker',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
-  { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
-  { name: 'Git',        logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-  { name: 'GitLab',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg' },
-  { name: 'Jenkins',    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg' },
-  { name: 'Redis',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
-  { name: 'Kafka',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg' },
-  { name: 'Oracle',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg' },
-  { name: 'Linux',      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
+/* ── Content ─────────────────────────────────────────────── */
+
+const experience = [
+  {
+    company: 'Capital One',
+    via: 'via Mindlance',
+    role: 'Product Manager · Product Owner, Account Servicing',
+    location: 'McLean, VA',
+    dates: 'Jun 2026 – Aug 2026',
+    tags: ['Product Strategy', 'Migration', 'Stakeholder Mgmt', 'Agile'],
+    points: [
+      'Product Owner for the Account Servicing domain and Product Manager for two engineering teams (10 engineers each), overseeing Cases (Complaints, Claims, Fraud Investigations), document association, customer activity/agent notes, and beneficiary/trust entity management.',
+      'Led product strategy and delivery for the DFS-to-Capital One migration, coordinating upstream (DFS), internal engineering, and downstream product teams on requirements, sequencing, and decisions; partnered with Legal on fraud, claims, and trust entities.',
+      'Directed data mapping across account servicing systems for migration wave planning, flagging issues before execution to reduce downstream risk.',
+      'Executed the August migration wave, moving 819,236 accounts from DFS to Capital One and driving remediation of identified issues.',
+    ],
+  },
+  {
+    company: 'Dell Technologies',
+    role: 'Software Engineer I · Software Engineering Intern',
+    location: 'Bangalore, India',
+    dates: 'Jan 2022 – Aug 2025',
+    tags: ['Java', 'REST APIs', 'Kubernetes', 'Redis', 'Grafana', 'Python'],
+    points: [
+      'Designed and built full-stack REST APIs and backend services supporting 150M+ connected devices across the full SDLC, working closely with engineering, architecture, and product teams.',
+      'Led infrastructure migration to Kubernetes, improving deployment throughput by 20% and cutting deployment latency 35% across microservices.',
+      'Built and maintained relational and NoSQL data layers supporting 10M+ daily transactions with zero downtime; presented technical decisions to engineering leadership.',
+      'Standardized Agile/Scrum workflows in Confluence (onboarding time −30% across 3 teams), built dashboards tracking 15+ service health metrics (incident detection −25%), and wrote Python automation saving ~4 hours per release.',
+    ],
+  },
 ];
 
-function MathArt() {
-  const canvasRef = React.useRef(null);
+const featuredProjects = [
+  {
+    title: 'Debatrium',
+    kicker: 'Multi-Agent AI System',
+    stack: ['Python', 'AWS', 'GPT-4o', 'NVIDIA NIM', 'SQS', 'Redis'],
+    description:
+      'A 9-agent system orchestrating GPT-4o and NVIDIA NIM models to run structured, multi-perspective debate, with an iterative feedback and quality-control loop refining agent outputs. Distributed backend on AWS: EC2 Auto Scaling Groups, 12 SQS FIFO queues with dead-letter handling, and ElastiCache Redis (Multi-AZ, TLS), secured via API Gateway and Firebase Auth.',
+    github: 'https://github.com/AlekyaKowta/multi-agent-debate-model',
+  },
+  {
+    title: 'Carbon-Aware Freight Routing',
+    kicker: 'Data Pipeline · Routing',
+    stack: ['Python', 'Pandas', 'PyTorch'],
+    description:
+      'An end-to-end data pipeline and routing application over a ~960-node road network enriched with real-world emissions and elevation data. Benchmarked multiple algorithmic approaches, improving routing efficiency while reducing estimated carbon output.',
+    github: 'https://github.com/JSciarillo/Multi-Objective-Reinforcement-Learning-for-Carbon-Aware-Global-Logistics',
+  },
+  {
+    title: 'Trustworthy AI Hackathon',
+    kicker: '1st Place Winner',
+    stack: ['Python', 'Pandas', 'Jupyter'],
+    description:
+      'An open-source analytical tool translating complex datasets into clear summary statistics and visualizations for non-technical stakeholders, built under hackathon time constraints.',
+    github: 'https://github.com/AlekyaKowta/TAI-Hackathon-Riverhouse-Problem5',
+    award: true,
+  },
+  {
+    title: 'Resilient Food',
+    kicker: 'GeorgeHacks · Spot Prize, Best Use of Solana',
+    stack: ['Python', 'Google Gemini', 'Solana', 'GeoPandas', 'Twilio', 'OpenStreetMap'],
+    description:
+      'A disaster-resilient food coordination platform connecting local vendors, farmers, and NGOs when infrastructure fails. Real-time SMS alerts fire on USGS/weather triggers, AI market-pulse summaries flag price shocks, digital ration tickets keep economic activity local, and donor transparency is enforced via on-chain Solana receipts.',
+    github: 'https://github.com/AlekyaKowta/GeorgeHacks_Food4All',
+    extraLinks: [{ label: 'Devpost', href: 'https://devpost.com/software/resilientfood' }],
+    award: true,
+  },
+  {
+    title: 'Adaptive Traffic Model Scaling',
+    kicker: 'Computer Vision · ML',
+    stack: ['Python', 'YOLOv8', 'TrafficCAM'],
+    description:
+      'Model scaling analysis for adaptive traffic monitoring, comparing YOLOv8 model sizes on a TrafficCAM subset. Involved extensive cleaning, validation, and preprocessing of large image datasets to train and evaluate detection models for real-world conditions.',
+    github: 'https://github.com/AlekyaKowta/adaptive-traffic-model-scaling',
+  },
+];
+
+const moreProjects = [
+  {
+    title: 'Security Research & Tooling',
+    note: 'Published in IEEE; co-authored Springer chapter, Cyber Intelligence and Information Retrieval',
+    stack: 'Python · Network Security · IoT',
+    links: [],
+  },
+  {
+    title: 'AI-Generated Image Verification',
+    note: 'Human vs. AI image classification with on-chain voting',
+    stack: 'Python · Selenium · Ethereum · Solidity',
+    links: [{ label: 'GitHub', href: 'https://github.com/jayparmar16/VoteAI-Image-Decentralized-Platform' }],
+  },
+  {
+    title: 'Smart Walking System',
+    note: 'Patent application (2022), assistive navigation',
+    stack: 'IoT · Embedded Systems',
+    links: [],
+  },
+];
+
+const skills = [
+  { group: 'Languages', items: ['Java', 'Python', 'C#', 'JavaScript', 'SQL', 'C++'] },
+  { group: 'Full-Stack & Web', items: ['React', 'Spring Boot', 'ASP.NET Core MVC', '.NET', 'REST APIs', 'Microservices', 'HTML', 'CSS'] },
+  { group: 'Product & Agile', items: ['Product Strategy', 'Roadmap Planning', 'Stakeholder Management', 'Agile/Scrum', 'Sprint Planning', 'Backlog (Jira)', 'Requirements Gathering', 'TDD'] },
+  { group: 'Cloud & DevOps', items: ['AWS (EC2, Lambda, S3)', 'Azure', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Linux'] },
+  { group: 'Data & Tools', items: ['Oracle', 'MySQL', 'NoSQL', 'Redis', 'Kafka', 'PowerBI', 'Grafana', 'Confluence'] },
+  { group: 'AI / ML', items: ['OpenAI GPT-4o API', 'Prompt Engineering', 'PyTorch', 'Pandas'] },
+];
+
+const education = [
+  {
+    school: 'The George Washington University',
+    degree: 'M.S. Computer Science',
+    detail: 'GPA 3.9 / 4.0 · Data Structures & Algorithms, ML & AI, Distributed Systems',
+    location: 'Washington, DC',
+    dates: 'May 2027',
+  },
+  {
+    school: 'Vellore Institute of Technology',
+    degree: 'B.Tech Information Technology',
+    detail: 'GPA 9.04 / 10',
+    location: 'Tamil Nadu, India',
+    dates: 'May 2022',
+  },
+];
+
+const gallery = {
+  art: [art1, art2, art3, art4],
+  photo: [photo1, photo2, photo3, photo4, photo5],
+};
+
+const navItems = [
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'beyond', label: 'Beyond' },
+  { id: 'contact', label: 'Contact' },
+];
+
+/* ── Hooks & helpers ─────────────────────────────────────── */
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+function useTheme() {
+  const [theme, setTheme] = useState(
+    () => document.documentElement.getAttribute('data-theme') || 'dark'
+  );
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const size = 140;
-    canvas.width = size;
-    canvas.height = size;
-    const cx = size / 2;
-    const cy = size / 2;
-    let frame = 0;
+    document.documentElement.setAttribute('data-theme', theme);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', theme === 'dark' ? '#0f1115' : '#f4efe4');
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {
+      // storage unavailable — theme still applies for this visit
+    }
+  }, [theme]);
 
-    const draw = () => {
-      ctx.clearRect(0, 0, size, size);
+  return [theme, () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))];
+}
 
-      // Outer glow ring
-      const glow = ctx.createRadialGradient(cx, cy, 30, cx, cy, 100);
-      glow.addColorStop(0, 'rgba(255, 100, 180, 0.08)');
-      glow.addColorStop(1, 'rgba(255, 100, 180, 0)');
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, size, size);
+/* ── Components ──────────────────────────────────────────── */
 
-      const t = frame * 0.01;
-      const k = 5; // rose petals (try 3, 5, 7)
-
-      // Draw trailing layers for depth
-      [0.018, 0.012, 0.006, 0].forEach((offset, i) => {
-        const alpha = 0.15 + i * 0.2;
-        const radius = 68 + Math.sin(t * 0.7) * 3;
-
-        ctx.beginPath();
-        for (let a = 0; a <= Math.PI * 2; a += 0.008) {
-          const r = radius * Math.cos(k * (a + t * 0.3 + offset));
-          const x = cx + r * Math.cos(a);
-          const y = cy + r * Math.sin(a);
-          a === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.closePath();
-
-        const grad = ctx.createLinearGradient(cx - 80, cy - 80, cx + 80, cy + 80);
-        grad.addColorStop(0, `rgba(255, 133, 194, ${alpha})`);
-        grad.addColorStop(0.5, `rgba(220, 0, 110, ${alpha * 0.8})`);
-        grad.addColorStop(1, `rgba(180, 80, 160, ${alpha})`);
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5 - i * 0.3;
-        ctx.stroke();
-      });
-
-      // Lissajous center accent
-      ctx.beginPath();
-      for (let i = 0; i <= 300; i++) {
-        const s = (i / 300) * Math.PI * 2;
-        const x = cx + 22 * Math.sin(3 * s + t * 0.5);
-        const y = cy + 22 * Math.cos(2 * s + t * 0.3);
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.strokeStyle = `rgba(255, 180, 220, 0.6)`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      // Center dot
-      ctx.beginPath();
-      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(220, 0, 110, 0.5)';
-      ctx.fill();
-
-      frame++;
-      requestAnimationFrame(draw);
-    };
-
-    const anim = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(anim);
-  }, []);
-
+// Seigaiha (青海波) wave scales. Rows are 10 units apart and alternate
+// offset; the pattern tile repeats every 40 × 20 units.
+function SeigaihaPattern({ id, scale = 1 }) {
+  const rows = [0, 10, 20, 30, 40];
+  const circles = [];
+  rows.forEach((y, r) => {
+    const xs = r % 2 === 0 ? [-40, 0, 40, 80] : [-20, 20, 60];
+    xs.forEach((x) => circles.push([x, y]));
+  });
   return (
-    <div className="math-art-wrap">
-      <canvas ref={canvasRef} className="math-canvas" />
-      {/* <span className="math-label">r = cos(5θ)</span> */}
-    </div>
+    <pattern id={id} width="40" height="20" patternUnits="userSpaceOnUse" patternTransform={`scale(${scale})`}>
+      {circles.map(([x, y]) => (
+        <g key={`${x}-${y}`} className="scale">
+          {[20, 15.5, 11, 6.5, 2.5].map((r) => (
+            <circle key={r} cx={x} cy={y} r={r} />
+          ))}
+        </g>
+      ))}
+    </pattern>
   );
 }
 
-
-function App() {
-  const [typedText, setTypedText] = useState('');
-  const fullText = "Hi, I'm Alekya Kowta - a passionate software engineer crafting scalable systems across distributed cloud infrastructure.";
+function WaveRail() {
+  const railRef = useRef(null);
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      setTypedText(fullText.slice(0, index));
-      index++;
-      if (index > fullText.length) clearInterval(timer);
-    }, 80);
-    return () => clearInterval(timer);
+    if (prefersReducedMotion()) return;
+    let frame = null;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        // Period of the pattern is 40px (tile scaled ×2), so modulo keeps it seamless
+        const offset = (window.scrollY * 0.25) % 40;
+        if (railRef.current) railRef.current.style.transform = `translateY(${-offset}px)`;
+        frame = null;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
-  const scrollToSection = (index) => {
-    if (index === 2) {
-      document.querySelector('.contact-footer')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      document.querySelectorAll('.section')[index]?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  return (
+    <aside className="wave-rail" aria-hidden="true">
+      <svg ref={railRef} className="wave-rail-svg">
+        <defs>
+          <SeigaihaPattern id="seigaiha-rail" scale={2} />
+        </defs>
+        <rect width="100%" height="100%" fill="url(#seigaiha-rail)" />
+      </svg>
+      <span className="wave-rail-label">波 · nami</span>
+    </aside>
+  );
+}
+
+// Stylised great-wave crest for the hero background
+function WaveCrest() {
+  return (
+    <svg className="wave-crest" viewBox="0 0 600 400" aria-hidden="true">
+      <path
+        className="crest-fill"
+        d="M0 400 L0 300 C60 280 110 240 150 190 C190 140 200 80 260 50 C330 15 420 30 460 90 C490 135 470 190 425 200 C395 207 372 188 380 162 C388 140 415 142 420 158 C432 130 410 100 375 100 C320 100 290 150 290 210 C290 290 360 340 450 340 C510 340 560 320 600 300 L600 400 Z"
+      />
+      <path
+        className="crest-line"
+        d="M20 320 C90 300 140 250 180 200 C220 150 230 100 280 75 C340 45 410 60 440 105"
+      />
+      <path
+        className="crest-line"
+        d="M40 345 C120 330 180 290 225 240 C260 200 270 150 310 125 C350 100 395 110 410 135"
+      />
+      <path
+        className="crest-line"
+        d="M320 250 C340 300 390 320 450 318 C510 316 555 298 600 280"
+      />
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <circle key={i} className="crest-foam" cx={250 + i * 38} cy={48 + Math.abs(i - 2.5) * 12} r={4 - Math.abs(i - 2.5) * 0.6} />
+      ))}
+    </svg>
+  );
+}
+
+function ThemeToggle({ theme, onToggle }) {
+  const next = theme === 'dark' ? 'light' : 'dark';
+  return (
+    <button className="theme-toggle" onClick={onToggle} aria-label={`Switch to ${next} theme`} title={`Switch to ${next} theme`}>
+      {theme === 'dark' ? (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" />
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+            <line key={a} x1="12" y1="2.5" x2="12" y2="5" transform={`rotate(${a} 12 12)`} />
+          ))}
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
+function Section({ id, index, kanji, title, children }) {
+  return (
+    <section id={id} className="section">
+      <header className="section-head">
+        <span className="section-index">
+          {String(index).padStart(2, '0')} / <span className="kanji">{kanji}</span>
+        </span>
+        <h2>{title}</h2>
+      </header>
+      {children}
+    </section>
+  );
+}
+
+function ProjectCard({ project }) {
+  return (
+    <article className={`project-card${project.github ? ' is-linked' : ''}`}>
+      <div className="project-top">
+        <span className={`project-kicker${project.award ? ' is-award' : ''}`}>
+          {project.award && '★ '}
+          {project.kicker}
+        </span>
+        {project.github && (
+          <span className="project-link" aria-hidden="true">
+            GitHub ↗
+          </span>
+        )}
+      </div>
+      <h3>
+        {project.github ? (
+          // ::after stretches this link over the whole card
+          <a className="card-link" href={project.github} target="_blank" rel="noreferrer">
+            {project.title}
+          </a>
+        ) : (
+          project.title
+        )}
+      </h3>
+      <p>{project.description}</p>
+      <ul className="chips">
+        {project.stack.map((s) => (
+          <li key={s}>{s}</li>
+        ))}
+      </ul>
+      {project.extraLinks && (
+        <div className="card-extra-links">
+          {project.extraLinks.map((l) => (
+            <a key={l.href} href={l.href} target="_blank" rel="noreferrer">
+              {l.label} ↗
+            </a>
+          ))}
+        </div>
+      )}
+    </article>
+  );
+}
+
+function Typewriter({ text }) {
+  const [shown, setShown] = useState(() => (prefersReducedMotion() ? text : ''));
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    let i = 0;
+    const timer = setInterval(() => {
+      i++;
+      setShown(text.slice(0, i));
+      if (i >= text.length) clearInterval(timer);
+    }, 38);
+    return () => clearInterval(timer);
+  }, [text]);
+
+  return (
+    <p className="typewriter">
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
+        {shown}
+        <span className="cursor">▍</span>
+      </span>
+    </p>
+  );
+}
+
+/* ── App ─────────────────────────────────────────────────── */
+
+function App() {
+  const [theme, toggleTheme] = useTheme();
 
   return (
     <div className="App">
-      {/* Cover Section */}
-      <section className="cover">
-        <div className="cover-content">
-          <MathArt />
-          <h1 className="name">Alekya Kowta</h1>
-          <p className="subtitle">Software Engineer</p>
-          <p className="typewriter">{typedText}<span className="cursor">|</span></p>
-          <div className="nav-links">
-            <button onClick={() => scrollToSection(0)} className="nav-btn">About</button>
-            <button onClick={() => scrollToSection(1)} className="nav-btn">Projects</button>
-            <button onClick={() => scrollToSection(2)} className="nav-btn">Contact</button>
-            <a
-              href="/Alekya_Kowta_Resume.pdf"
-              download="Alekya_Kowta_Resume.pdf"
-              className="nav-btn resume-btn"
-            >
-              Resume ↓
+      <WaveRail />
+
+      <nav className="nav">
+        <a href="#top" className="monogram" aria-label="Back to top">
+          AK
+        </a>
+        <div className="nav-links">
+          {navItems.map((n) => (
+            <a key={n.id} href={`#${n.id}`}>
+              {n.label}
+            </a>
+          ))}
+        </div>
+        <div className="nav-actions">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <a href="/Alekya_Kowta_Resume.pdf" target="_blank" rel="noreferrer" className="btn btn-accent">
+            Resume ↗
+          </a>
+        </div>
+      </nav>
+
+      <main className="page">
+        {/* Hero */}
+        <header id="top" className="hero">
+          <WaveCrest />
+          <p className="eyebrow">Arlington, VA · Washington, DC</p>
+          <h1 className="hero-name">Alekya Kowta</h1>
+          <p className="hero-role">
+            Product Manager <span className="amp">&amp;</span> Software Engineer
+          </p>
+          <Typewriter text="Shipping account-servicing platforms at Capital One; previously built backend systems for 150M+ devices at Dell." />
+          <div className="hero-ctas">
+            <a href="#projects" className="btn btn-accent">
+              View projects
+            </a>
+            <a href="/Alekya_Kowta_Resume.pdf" target="_blank" rel="noreferrer" className="btn">
+              Resume ↗
+            </a>
+            <a href="https://www.github.com/AlekyaKowta" target="_blank" rel="noreferrer" className="btn">
+              GitHub ↗
+            </a>
+            <a href="https://www.linkedin.com/in/alekya-kowta" target="_blank" rel="noreferrer" className="btn">
+              LinkedIn ↗
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="section about">
-        <h2>About</h2>
-
-        {/* Skills */}
-        <div className="skills-block">
-          <h3>Technical Skills</h3>
-          <div className="skills-pills">
-            {skills.map((skill) => (
-              <div className="skill-pill" key={skill.name}>
-                <img src={skill.logo} alt={skill.name} className="skill-icon" />
-                <span>{skill.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+          <dl className="hero-stats">
+            <div>
+              <dt>819,236</dt>
+              <dd>accounts migrated</dd>
+            </div>
+            <div>
+              <dt>150M+</dt>
+              <dd>devices served</dd>
+            </div>
+            <div>
+              <dt>2 × 10</dt>
+              <dd>engineers led as PM</dd>
+            </div>
+          </dl>
+        </header>
 
         {/* Experience */}
-        <div className="experience-block">
-          <h3>Experience</h3>
+        <Section id="experience" index={1} kanji="経験" title="Experience">
+          <ol className="timeline">
+            {experience.map((job) => (
+              <li key={job.company} className="job">
+                <div className="job-meta">
+                  <span className="job-dates">{job.dates}</span>
+                  <span className="job-location">{job.location}</span>
+                </div>
+                <div className="job-body">
+                  <h3>
+                    {job.company}
+                    {job.via && <span className="job-via"> ({job.via})</span>}
+                  </h3>
+                  <p className="job-role">{job.role}</p>
+                  <ul className="job-points">
+                    {job.points.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ul>
+                  <ul className="chips">
+                    {job.tags.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ol>
 
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-body">
-                <div className="timeline-meta">
-                  <span className="timeline-company">Dell Technologies</span>
-                  <span className="timeline-date">Aug 2022 – Aug 2025</span>
-                </div>
-                <h4 className="timeline-role">Software Engineer I</h4>
-                <div className="timeline-tags">
-                  <span>Kubernetes</span><span>Kafka</span><span>Azure</span><span>Redis</span><span>Oracle</span>
-                </div>
-                <ul className="timeline-points">
-                  <li>Architected distributed REST APIs configuring 150M+ connected devices at 99.9% availability.</li>
-                  <li>Led Kubernetes migration — 20% throughput gain and 35% reduction in deployment latency.</li>
-                  <li>Built Kafka & Azure Event Hubs pipelines processing 500K+ telemetry events daily with sub-second latency.</li>
-                  <li>Reduced data retrieval latency by 40% via Redis caching across high-concurrency microservices.</li>
-                  <li>Designed schemas supporting 10M+ daily transactions with zero downtime during peak load.</li>
-                </ul>
-              </div>
+          <div className="subgrid">
+            <div>
+              <h3 className="subhead">Skills</h3>
+              <dl className="skills">
+                {skills.map((s) => (
+                  <div key={s.group} className="skill-row">
+                    <dt>{s.group}</dt>
+                    <dd>
+                      <ul className="chips">
+                        {s.items.map((i) => (
+                          <li key={i}>{i}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-body">
-                <div className="timeline-meta">
-                  <span className="timeline-company">Dell Technologies</span>
-                  <span className="timeline-date">Jan 2022 – Aug 2022</span>
-                </div>
-                <h4 className="timeline-role">Software Engineering Intern</h4>
-                <div className="timeline-tags">
-                  <span>Grafana</span><span>PowerBI</span><span>Python</span>
-                </div>
-                <ul className="timeline-points">
-                  <li>Built Grafana & PowerBI dashboards monitoring 15+ service KPIs, cutting incident detection time by 25%.</li>
-                  <li>Co-developed 3 backend POCs for secure workspace features, presenting results to engineering leadership.</li>
-                  <li>Automated deployment validation with Python scripts, saving ~4 hours per release cycle.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-body">
-                <div className="timeline-meta">
-                  <span className="timeline-company">GKMT IT</span>
-                  <span className="timeline-date">Mar 2020 – Jun 2020</span>
-                </div>
-                <h4 className="timeline-role">Software Intern</h4>
-                <div className="timeline-tags">
-                  <span>HTML</span><span>CSS</span><span>Web</span>
-                </div>
-                <ul className="timeline-points">
-                  <li>Engineered responsive platforms with optimized asset delivery, reducing page load times by 25%.</li>
-                  <li>Designed secure authentication system, cutting account-related support tickets by 40%.</li>
-                </ul>
-              </div>
+            <div>
+              <h3 className="subhead">Education</h3>
+              <ul className="education">
+                {education.map((e) => (
+                  <li key={e.school}>
+                    <span className="job-dates">{e.dates}</span>
+                    <h4>{e.school}</h4>
+                    <p className="job-role">{e.degree}</p>
+                    <p className="muted">{e.detail}</p>
+                    <p className="muted small">{e.location}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Projects Section */}
-      <section className="section projects">
-        <h2>Projects</h2>
-        <div className="project-grid">
-          <div className="project-card debatrium-card" onClick={() => window.open('https://github.com/CSCI-6421-Distributed-System-Course/final-project-albert-einstein', '_blank')} style={{cursor:'pointer'}}>
-            <h3>Debatrium</h3>
-            <p className="project-tags">Python · OpenAI GPT-4o · AWS EC2 · SQS · ElastiCache Redis · API Gateway · Firebase Auth · CloudWatch</p>
-            <p>Nine independent GPT-4o agents — split across Research, Critic, and Judge roles — autonomously debate any question across iterative rounds. If judges' average score falls below 0.85, feedback loops back into research agents for another round, treating AI answer quality like peer review. Built on a cloud-native AWS architecture with EC2 Auto Scaling Groups, 12 SQS FIFO queues, and ElastiCache Redis (Multi-AZ).</p>
+        {/* Projects */}
+        <Section id="projects" index={2} kanji="作品" title="Projects">
+          <div className="project-grid">
+            {featuredProjects.map((p) => (
+              <ProjectCard key={p.title} project={p} />
+            ))}
           </div>
-          <div className="project-card" onClick={() => window.open('https://github.com/jayparmar16/VoteAI-Image-Decentralized-Platform', '_blank')} style={{cursor:'pointer'}}>
-            <h3>AI-Generated Image Verification</h3>
-            <p className="project-tags">Python · Selenium · Ethereum · Solidity</p>
-            <p>Classifies images as human-generated vs AI-generated. User votes recorded via Solidity smart contracts for transparency and integrity.</p>
-          </div>
-          <div className="project-card">
-            <h3>Multi-Objective Carbon-Aware Freight Routing</h3>
-            <p className="project-tags">Python · Pandas · OSMnx · PyTorch · Stable-Baselines3</p>
-            <p>End-to-end pipeline enriching a real DC road graph (~960 nodes) with MOVES5 emission factors, SRTM elevation grades, and 4 time-of-day congestion profiles — generating 12 carbon weight attributes per edge across 3 vehicle classes. Benchmarked Weighted A* (3.34% carbon savings), Double DQN, and PPO with Behavioral Cloning (0.946 carbon optimality) jointly optimizing delivery time and CO₂ via preference weight α∈[0,1]. Terrain study showed 85% more benefit in hilly vs. flat networks.</p>
-          </div>
-          <div className="project-card">
-            <h3>Traffic Data Analysis using YOLO Object Detection Models</h3>
-            <p className="project-tags">ML</p>
-            <p>Performed extensive data cleaning, validation, and preprocessing on large image datasets to train and evaluate machine learning models for real-world scenarios.</p>
-          </div>
-          <div className="project-card winner" onClick={() => window.open('https://github.com/kritikaberry/TAI-Hackathon-Riverhouse-Problem5', '_blank')} style={{cursor:'pointer'}}>
-              <div className="winner-badge">🏆 Winner</div>
-              <h3>Trustworthy AI Hackathon</h3>
-              <p className="project-tags">AI · Ethics · Machine Learning</p>
-              <p>Won the Trustworthy AI Hackathon — building responsible, transparent AI systems with a focus on fairness and accountability.</p>
-          </div>
-          <div className="project-card winner">
-              <div className="winner-badge">🏆 Spot Prize — Best Use of Solana</div>
-              <h3>Resilient Food — GeorgeHacks</h3>
-              <p className="project-tags">Python · Google Gemini · Solana · GeoPandas · Twilio · OpenStreetMap · OpenWeatherMap · USGS</p>
-              <p>Disaster-resilient food coordination platform connecting local vendors, farmers, and NGOs when infrastructure fails. Real-time SMS alerts fire to vendors on USGS/weather triggers, AI-powered market pulse summaries flag price shocks, and digital ration tickets keep economic activity local. Donor transparency enforced via on-chain Solana Devnet receipts. Road-network geospatial analysis (not straight-line) surfaces truly underserved communities.</p>
-              <div className="project-links">
-                <a href="https://devpost.com/software/resilientfood" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>Devpost ↗</a>
-                <a href="https://github.com/jayparmar16/GeorgeHacks_Food4All" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>GitHub ↗</a>
-              </div>
-          </div>
-          <div className="project-card">
-            <h3>Smart Walking System</h3>
-            <p className="project-tags">IoT · Embedded Systems</p>
-            <p>Patented assistive navigation system for the elderly and visually impaired. Filed as a Patent Application (2022).</p>
-          </div>
-          <div className="project-card">
-            <h3>Pentesting & IoT Security Research</h3>
-            <p className="project-tags">IEEE · Springer · Cybersecurity</p>
-            <p>Published two papers on information gathering for pentesting (IEEE) and IoT vulnerabilities and threats (Springer, 2022).</p>
-          </div>
-        </div>
-      </section>
 
-      {/* Hobbies Section */}
-      <section className="section hobbies">
-        <div className="hobbies-header">
-          <h2>Beyond the Code</h2>
-          <p className="hobbies-tagline">
-            Where algorithms meet aesthetics —<br/>
-            <em>I paint with light, and sketch with silence.</em>
+          <h3 className="subhead">More work</h3>
+          <ul className="more-list">
+            {moreProjects.map((p) => (
+              <li key={p.title}>
+                <div>
+                  <h4>{p.title}</h4>
+                  <p className="muted">{p.note}</p>
+                </div>
+                <span className="more-stack">{p.stack}</span>
+                <span className="more-links">
+                  {p.links.map((l) => (
+                    <a key={l.href} href={l.href} target="_blank" rel="noreferrer">
+                      {l.label} ↗
+                    </a>
+                  ))}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        {/* Beyond the code */}
+        <Section id="beyond" index={3} kanji="余白" title="Beyond the Code">
+          <p className="lede">
+            Where algorithms meet aesthetics. <em>I paint with light, and sketch with silence.</em>
           </p>
-        </div>
 
-        <div className="hobbies-split">
-        {/* Art */}
-        <div className="hobby-block">
-          <div className="hobby-label">
-            <span className="hobby-number">01</span>
-            <div>
-              <h3>Art & Illustration</h3>
-              <p>Translating emotion into strokes. Every canvas is a system with its own logic.</p>
+          <div className="gallery-block">
+            <h3 className="subhead">Art &amp; Illustration</h3>
+            <div className="gallery gallery-art">
+              {gallery.art.map((src, i) => (
+                <figure key={src}>
+                  <img src={src} alt={`Artwork ${i + 1} by Alekya Kowta`} loading="lazy" />
+                  <figcaption>Art {String(i + 1).padStart(2, '0')}</figcaption>
+                </figure>
+              ))}
             </div>
           </div>
-          <div className="gallery-art">
-            <div className="gallery-cell tall">
-              <div className="gallery-img-wrap">
-                <img src={art1} alt="" className="gallery-img" />
-                <span className="gallery-label">Art 01</span>
-              </div>
-            </div>
-            <div className="gallery-col">
-              <div className="gallery-cell">
-                <div className="gallery-img-wrap">
-                  <img src={art2} alt="" className="gallery-img" />
-                  <span className="gallery-label">Art 02</span>
-                </div>
-              </div>
-              <div className="gallery-cell">
-                <div className="gallery-img-wrap">
-                  <img src={art3} alt="" className="gallery-img" />
-                  <span className="gallery-label">Art 03</span>
-                </div>
-              </div>
-            </div>
-            <div className="gallery-cell">
-              <div className="gallery-img-wrap">
-                <img src={art4} alt="" className="gallery-img" />
-                <span className="gallery-label">Art 04</span>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="hobby-divider" />
+          <div className="gallery-block">
+            <h3 className="subhead">Photography</h3>
+            <div className="gallery gallery-photo">
+              {gallery.photo.map((src, i) => (
+                <figure key={src}>
+                  <img src={src} alt={`Photograph ${i + 1} by Alekya Kowta`} loading="lazy" />
+                  <figcaption>Photo {String(i + 1).padStart(2, '0')}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </Section>
+      </main>
 
-        {/* Photography */}
-        <div className="hobby-block">
-          <div className="hobby-label">
-            <span className="hobby-number">02</span>
-            <div>
-              <h3>Photography</h3>
-              <p>Capturing the frames between moments. Finding symmetry in the unscripted world.</p>
-            </div>
-          </div>
-          <div className="gallery-photo">
-            <div className="gallery-cell cell-tall-left">
-              <div className="gallery-img-wrap">
-                <img src={photo1} alt="" className="gallery-img" />
-                <span className="gallery-label">Photo 01</span>
-              </div>
-            </div>
-            <div className="gallery-cell cell-mid-top-1">
-              <div className="gallery-img-wrap">
-                <img src={photo2} alt="" className="gallery-img" />
-                <span className="gallery-label">Photo 02</span>
-              </div>
-            </div>
-            <div className="gallery-cell cell-mid-top-2">
-              <div className="gallery-img-wrap">
-                <img src={photo3} alt="" className="gallery-img" />
-                <span className="gallery-label">Photo 03</span>
-              </div>
-            </div>
-            <div className="gallery-cell cell-tall-right">
-              <div className="gallery-img-wrap">
-                <img src={photo4} alt="" className="gallery-img" />
-                <span className="gallery-label">Photo 04</span>
-              </div>
-            </div>
-            <div className="gallery-cell cell-mid-bot">
-            <div className="gallery-img-wrap">
-              <img src={photo5} alt="" className="gallery-img" />
-              <span className="gallery-label">Photo 05</span>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </section>
-
-      {/* Contact Footer */}
-      <footer className="contact-footer">
-        <div className="contact-top">
-          <div className="contact-left">
-            <h2>Let's connect</h2>
-            <p className="contact-sub">Open to new opportunities and collaborations.</p>
-          </div>
-          <div className="contact-right">
-            <a href="mailto:a.kowta@gwu.edu" className="contact-item">
-              <span className="contact-icon">✉</span>
-              <span>a.kowta@gwu.edu</span>
+      {/* Contact */}
+      <footer id="contact" className="footer">
+        <div className="footer-inner">
+          <p className="section-index">
+            04 / <span className="kanji">連絡</span>
+          </p>
+          <h2 className="footer-title">Let's build something.</h2>
+          <p className="muted">Open to product and engineering roles, and collaborations.</p>
+          <div className="footer-links">
+            <a href="mailto:a.kowta@gwu.edu">a.kowta@gwu.edu</a>
+            <a href="tel:7039460261">703-946-0261</a>
+            <a href="/Alekya_Kowta_Resume.pdf" target="_blank" rel="noreferrer">
+              Resume ↗
             </a>
-            <a href="tel:7039460261" className="contact-item">
-              <span className="contact-icon">✆</span>
-              <span>703-946-0261</span>
+            <a href="https://www.linkedin.com/in/alekya-kowta" target="_blank" rel="noreferrer">
+              LinkedIn ↗
             </a>
-            <div className="contact-socials">
-              <a href="https://www.linkedin.com/in/alekya-kowta" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
-              <a href="https://www.github.com/AlekyaKowta" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
-            </div>
+            <a href="https://www.github.com/AlekyaKowta" target="_blank" rel="noreferrer">
+              GitHub ↗
+            </a>
           </div>
-        </div>
-        <div className="contact-divider" />
-        <div className="contact-bottom">
-          <span className="contact-copy">© 2025 Alekya Kowta · Arlington, VA</span>
-          <span className="contact-tagline">Built with React</span>
+          <div className="footer-bottom">
+            <span>© 2026 Alekya Kowta · Arlington, VA</span>
+            <span>Built with React</span>
+          </div>
         </div>
       </footer>
     </div>
