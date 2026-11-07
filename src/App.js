@@ -48,6 +48,20 @@ const experience = [
 
 const featuredProjects = [
   {
+    title: 'AskWRI',
+    kicker: 'AWS Breaking Barriers 2026 · DC Finalist',
+    stack: ['Amazon Bedrock', 'AgentCore', 'Claude', 'Aurora pgvector', 'Lambda', 'Terraform', 'Next.js'],
+    description:
+      "A cited research assistant over the World Resources Institute's 580+ publications, built by team DefinitelyNotAI; I designed the architecture and built much of the application. Every sentence is checked against its source passage and a Bedrock Guardrails grounding check, then cited to the exact PDF page; when WRI's research doesn't answer the question, it declines instead of guessing. Includes deep-research briefings, fact-checking of drafts, searchable charts and maps, a citation map, and answers in Spanish, Portuguese and Bahasa Indonesia. Agent on AgentCore Runtime with tools behind AgentCore Gateway, hybrid search with reranking over Aurora pgvector. Evaluation: 100% of figures cited, 92% recall@5, ~5¢ per answer.",
+    github: 'https://github.com/jayparmar16/DefinitelyNotAI',
+    award: true,
+    video: {
+      src: '/media/askwri-demo.mp4',
+      poster: '/media/askwri-poster.jpg',
+      label: 'AskWRI demo video',
+    },
+  },
+  {
     title: 'Debatrium',
     kicker: 'Multi-Agent AI System',
     stack: ['Python', 'AWS', 'GPT-4o', 'NVIDIA NIM', 'SQS', 'Redis'],
@@ -298,8 +312,33 @@ function Section({ id, index, kanji, title, children }) {
 }
 
 function ProjectCard({ project }) {
+  const body = <ProjectCardBody project={project} />;
+  const classes = ['project-card', project.github && 'is-linked', project.video && 'has-media']
+    .filter(Boolean)
+    .join(' ');
+
+  if (!project.video) return <article className={classes}>{body}</article>;
+
   return (
-    <article className={`project-card${project.github ? ' is-linked' : ''}`}>
+    <article className={classes}>
+      <div className="project-body">{body}</div>
+      <video
+        className="project-video"
+        controls
+        preload="none"
+        playsInline
+        poster={project.video.poster}
+        aria-label={project.video.label}
+      >
+        <source src={project.video.src} type="video/mp4" />
+      </video>
+    </article>
+  );
+}
+
+function ProjectCardBody({ project }) {
+  return (
+    <>
       <div className="project-top">
         <span className={`project-kicker${project.award ? ' is-award' : ''}`}>
           {project.award && '★ '}
@@ -336,7 +375,7 @@ function ProjectCard({ project }) {
           ))}
         </div>
       )}
-    </article>
+    </>
   );
 }
 

@@ -608,6 +608,34 @@ figcaption,
   font-size: 2.2rem;
 }
 
+/* Keep an odd card out at the end from leaving a gap beside it */
+.project-card:last-child:nth-child(even) {
+  grid-column: 1 / -1;
+}
+
+/* Featured card with a demo video: text left, video right */
+.project-card.has-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.project-video {
+  position: relative;
+  z-index: 1; /* sit above the card-wide link so the controls stay clickable */
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line);
+}
+
 .project-card.is-linked:hover {
   background: var(--bg-raised);
 }
@@ -901,6 +929,11 @@ figcaption {
 
   .project-card:first-child h3 {
     font-size: 1.8rem;
+  }
+
+  .project-card.has-media {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .more-list li {
