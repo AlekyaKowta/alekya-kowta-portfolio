@@ -62,12 +62,24 @@ const featuredProjects = [
     },
   },
   {
+    title: 'RTX Autonomous Vehicle Challenge',
+    kicker: 'Raytheon AVC 2026–27 · Perception on Neuromorphic Hardware',
+    stack: ['Python', 'Keras', 'BrainChip Akida', 'YOLO', 'OpenCV', 'Docker'],
+    description:
+      "Part of GW's team in the RTX (Raytheon) Autonomous Vehicle Challenge, working on the robot's perception (\"Eyes\") on a BrainChip Akida AKD1000 neuromorphic chip. Built a die/obstacle classifier in Keras, quantized it to 4-bit and converted it for Akida 1.0 with no accuracy loss (99.9%, fits in 74 of the chip's 80 neural processors); fine-tuning on real photos lifted real-world accuracy from 36% to 79%. Benchmarked three detectors (OpenCV + classifier, BrainChip YOLO, Ultralytics YOLO): BrainChip YOLO reached 0.996 mAP and runs entirely on the chip, while Ultralytics YOLO can't convert to Akida 1.0. Also built a tracking and target-memory layer that keeps a lock on targets the judges move mid-run and re-acquires them from Leader's Intent hints.",
+    github: 'https://github.com/gwu-rtx-26-27',
+  },
+  {
     title: 'Debatrium',
     kicker: 'Multi-Agent AI System',
     stack: ['Python', 'AWS', 'GPT-4o', 'NVIDIA NIM', 'SQS', 'Redis'],
     description:
       'A 9-agent system orchestrating GPT-4o and NVIDIA NIM models to run structured, multi-perspective debate, with an iterative feedback and quality-control loop refining agent outputs. Distributed backend on AWS: EC2 Auto Scaling Groups, 12 SQS FIFO queues with dead-letter handling, and ElastiCache Redis (Multi-AZ, TLS), secured via API Gateway and Firebase Auth.',
     github: 'https://github.com/AlekyaKowta/multi-agent-debate-model',
+    image: {
+      src: '/media/debatrium-architecture.png',
+      alt: 'Debatrium AWS architecture: API Gateway, orchestrator, researcher, critic and judge agent pools on SQS queues with dead-letter queues, DynamoDB and Lambda flow control',
+    },
   },
   {
     title: 'Carbon-Aware Freight Routing',
@@ -361,6 +373,14 @@ function ProjectCardBody({ project }) {
         )}
       </h3>
       <p>{project.description}</p>
+      {project.image && (
+        <a className="project-figure" href={project.image.src} target="_blank" rel="noreferrer">
+          <div className="project-figure-frame">
+            <img src={project.image.src} alt={project.image.alt} loading="lazy" />
+          </div>
+          <span>Architecture diagram · click to enlarge ↗</span>
+        </a>
+      )}
       <ul className="chips">
         {project.stack.map((s) => (
           <li key={s}>{s}</li>

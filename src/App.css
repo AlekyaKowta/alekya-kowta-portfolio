@@ -664,6 +664,51 @@ figcaption,
   outline-offset: -2px;
 }
 
+.project-figure {
+  position: relative;
+  z-index: 1; /* above the card-wide link so it opens the image */
+  /* Basis 0: the figure adds no height of its own, it only fills
+     whatever space the taller card beside it leaves in the row */
+  flex: 1 1 0;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.project-figure-frame {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* Absolutely positioned so the image's own size never stretches the row */
+.project-figure img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: opacity 0.2s ease;
+}
+
+.project-figure:hover img {
+  opacity: 0.85;
+}
+
+.project-figure span {
+  text-align: center;
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.project-figure:hover span {
+  color: var(--accent);
+}
+
 .card-extra-links {
   position: relative;
   z-index: 1;
@@ -721,6 +766,11 @@ figcaption,
   color: var(--muted);
   font-size: 0.95rem;
   flex: 1;
+}
+
+/* With a figure below, let the figure take the spare height instead */
+.project-card p:has(+ .project-figure) {
+  flex: none;
 }
 
 .more-list li {
