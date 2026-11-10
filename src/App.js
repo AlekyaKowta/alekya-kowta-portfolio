@@ -143,9 +143,9 @@ const skills = [
   { group: 'Languages', items: ['Java', 'Python', 'C#', 'JavaScript', 'SQL', 'C++'] },
   { group: 'Full-Stack & Web', items: ['React', 'Spring Boot', 'ASP.NET Core MVC', '.NET', 'REST APIs', 'Microservices', 'HTML', 'CSS'] },
   { group: 'Product & Agile', items: ['Product Strategy', 'Roadmap Planning', 'Stakeholder Management', 'Agile/Scrum', 'Sprint Planning', 'Backlog (Jira)', 'Requirements Gathering', 'TDD'] },
-  { group: 'Cloud & DevOps', items: ['AWS (EC2, Lambda, S3)', 'Azure', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Linux'] },
+  { group: 'Cloud & DevOps', items: ['AWS (EC2, Lambda, S3, Aurora, DynamoDB, Cognito, CloudFront, CloudWatch, VPC, IAM)', 'Terraform', 'Azure', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Linux'] },
   { group: 'Data & Tools', items: ['Oracle', 'MySQL', 'NoSQL', 'Redis', 'Kafka', 'PowerBI', 'Grafana', 'Confluence'] },
-  { group: 'AI / ML', items: ['OpenAI GPT-4o API', 'Prompt Engineering', 'PyTorch', 'Pandas'] },
+  { group: 'AI / ML', items: ['Amazon Bedrock', 'Bedrock AgentCore', 'Bedrock Guardrails', 'RAG (pgvector, Titan Embeddings)', 'Claude API', 'OpenAI GPT-4o API', 'Prompt Engineering', 'PyTorch', 'Pandas'] },
 ];
 
 const education = [
